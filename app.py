@@ -40,15 +40,16 @@ def quiz():
         if selected_answer == question["answer"]:
             session["score"] += 1
         session["question_index"] += 1
+        session.modified = True  
+        return redirect(url_for("quiz"))  # Redirect to refresh session data
 
     return render_template("index.html", question=question, score=session["score"], total=len(questions))
 
-# New route to restart the quiz
 @app.route("/restart")
 def restart():
-    session.pop("score", None)
-    session.pop("question_index", None)
+    session.clear()  # Fully reset quiz progress
     return redirect(url_for("quiz"))
+
 
 if __name__ == "__main__":
     app.run(debug=True)
