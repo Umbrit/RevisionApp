@@ -19,8 +19,44 @@ questions = [
         "question": "What is the pH of pure water?",
         "options": ["7", "1", "10", "14"],
         "answer": "7"
+    },
+    {
+        "question": "Which element is a noble gas?",
+        "options": ["Oxygen", "Nitrogen", "Neon", "Hydrogen"],
+        "answer": "Neon"
+    },
+    {
+        "question": "What is the chemical formula for water?",
+        "options": ["H2O", "O2", "CO2", "H2O2"],
+        "answer": "H2O"
+    },
+    {
+        "question": "Which metal is liquid at room temperature?",
+        "options": ["Iron", "Mercury", "Lead", "Gold"],
+        "answer": "Mercury"
+    },
+    {
+        "question": "What is the charge of an electron?",
+        "options": ["Positive", "Negative", "Neutral", "Variable"],
+        "answer": "Negative"
+    },
+    {
+        "question": "What gas do humans exhale?",
+        "options": ["Oxygen", "Carbon Dioxide", "Nitrogen", "Helium"],
+        "answer": "Carbon Dioxide"
+    },
+    {
+        "question": "Which of these is an alkali metal?",
+        "options": ["Calcium", "Potassium", "Aluminium", "Silver"],
+        "answer": "Potassium"
+    },
+    {
+        "question": "What is the most abundant gas in Earth's atmosphere?",
+        "options": ["Oxygen", "Carbon Dioxide", "Nitrogen", "Argon"],
+        "answer": "Nitrogen"
     }
 ]
+
 
 @app.route("/", methods=["GET", "POST"])
 def quiz():
