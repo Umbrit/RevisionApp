@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemistry Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Chemistry Quiz</h1>
+        <p>Score: {{ score }}/{{ total }}</p>
+
+        {% if question %}
+            <form method="POST">
+                <p>{{ question["question"] }}</p>
+                {% for option in question["options"] %}
+                    <label>
+                        <input type="radio" name="answer" value="{{ option }}" required>
+                        {{ option }}
+                    </label><br>
+                {% endfor %}
+                <button type="submit">Submit</button>
+            </form>
+        {% else %}
+            <h2>Quiz Complete!</h2>
+            <p>Final Score: {{ score }}/{{ total }}</p>
+            <a href="/">Restart</a>
+        {% endif %}
+    </div>
+</body>
+</html>
