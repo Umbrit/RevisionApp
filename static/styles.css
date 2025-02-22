@@ -1,27 +1,36 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif; /* Changed to a more modern font */
     text-align: center;
-    background-color: #f4f4f4;
+    background-color: #e0f7fa; /* Light cyan background */
+    background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png'); /* Optional texture */
 }
 
 .container {
-    width: 50%;
+    width: 60%; /* Slightly wider container */
     margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px gray;
+    background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+    padding: 30px; /* More padding */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Softer shadow */
+    border: 1px solid #00796b; /* Chemistry theme color */
+}
+
+h1 {
+    color: #00796b; /* Main heading color */
+    font-size: 2.5em; /* Larger heading */
+    margin-bottom: 20px; /* Space below heading */
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: #00796b; /* Chemistry theme color */
     color: white;
     border: none;
-    padding: 10px;
+    padding: 12px 20px; /* More padding for buttons */
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px; /* Larger button font */
+    border-radius: 5px; /* Slightly rounded button corners */
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #004d40; /* Darker green on hover */
 }
