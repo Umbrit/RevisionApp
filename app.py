@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect, url_for
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key"  # Required for session tracking
@@ -42,6 +42,13 @@ def quiz():
         session["question_index"] += 1
 
     return render_template("index.html", question=question, score=session["score"], total=len(questions))
+
+# New route to restart the quiz
+@app.route("/restart")
+def restart():
+    session.pop("score", None)
+    session.pop("question_index", None)
+    return redirect(url_for("quiz"))
 
 if __name__ == "__main__":
     app.run(debug=True)
