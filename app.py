@@ -59,56 +59,57 @@ questions = [
 
 questions2 = [
     {
-        "question": "What is the pH of a neutral solution?",
-        "options": ["0", "7", "14", "1"],
-        "answer": "7"
+        "question": "Which element is at the top of Group 7 in the periodic table?",
+        "options": ["Fluorine", "Chlorine", "Bromine", "Iodine"],
+        "answer": "Fluorine"
     },
     {
-        "question": "Which ion is responsible for acidity in solutions?",
-        "options": ["OH⁻", "Na⁺", "H⁺", "Cl⁻"],
-        "answer": "H⁺"
+        "question": "What happens to the reactivity of halogens as you go down Group 7?",
+        "options": ["It increases", "It decreases", "It stays the same", "It fluctuates"],
+        "answer": "It decreases"
     },
     {
-        "question": "What is the name of the substance that neutralizes an acid?",
-        "options": ["Salt", "Base", "Water", "Metal"],
-        "answer": "Base"
+        "question": "Which halogen is a liquid at room temperature?",
+        "options": ["Fluorine", "Chlorine", "Bromine", "Iodine"],
+        "answer": "Bromine"
     },
     {
-        "question": "What products are formed when an acid reacts with a metal carbonate?",
-        "options": ["Salt and water", "Salt and carbon dioxide", "Salt, water, and carbon dioxide", "Salt and hydrogen"],
-        "answer": "Salt, water, and carbon dioxide"
+        "question": "What is the state of iodine at room temperature?",
+        "options": ["Gas", "Liquid", "Solid", "Plasma"],
+        "answer": "Solid"
     },
     {
-        "question": "What is the general word equation for a reaction between an acid and an alkali?",
-        "options": ["Acid + Metal → Salt + Hydrogen", "Acid + Alkali → Salt + Water", "Acid + Carbonate → Salt + Water + Carbon Dioxide", "Acid + Oxygen → Water"],
-        "answer": "Acid + Alkali → Salt + Water"
+        "question": "What color is chlorine gas?",
+        "options": ["Red", "Green", "Purple", "Yellow"],
+        "answer": "Green"
     },
     {
-        "question": "What color does universal indicator turn in a strong acid?",
-        "options": ["Blue", "Green", "Red", "Purple"],
-        "answer": "Red"
+        "question": "What type of bonding do halogens form in diatomic molecules?",
+        "options": ["Ionic", "Metallic", "Covalent", "Hydrogen"],
+        "answer": "Covalent"
     },
     {
-        "question": "Which of these substances is an alkali?",
-        "options": ["Hydrochloric acid", "Sulfuric acid", "Sodium hydroxide", "Carbon dioxide"],
-        "answer": "Sodium hydroxide"
+        "question": "Which halogen is the most reactive?",
+        "options": ["Fluorine", "Chlorine", "Bromine", "Iodine"],
+        "answer": "Fluorine"
     },
     {
-        "question": "What type of reaction occurs when an acid and a base react together?",
-        "options": ["Oxidation", "Neutralization", "Combustion", "Precipitation"],
-        "answer": "Neutralization"
+        "question": "What is the general trend in boiling points of halogens down the group?",
+        "options": ["They increase", "They decrease", "They stay the same", "They fluctuate randomly"],
+        "answer": "They increase"
     },
     {
-        "question": "What is the name of the salt formed when hydrochloric acid reacts with sodium hydroxide?",
-        "options": ["Sodium sulfate", "Sodium nitrate", "Sodium chloride", "Sodium carbonate"],
-        "answer": "Sodium chloride"
+        "question": "Which halogen is commonly used in disinfectants and bleach?",
+        "options": ["Fluorine", "Chlorine", "Bromine", "Iodine"],
+        "answer": "Chlorine"
     },
     {
-        "question": "Which gas is produced when a metal reacts with an acid?",
-        "options": ["Oxygen", "Carbon dioxide", "Hydrogen", "Chlorine"],
-        "answer": "Hydrogen"
+        "question": "What is formed when halogens react with metals?",
+        "options": ["Metal oxides", "Metal halides", "Metal carbonates", "Metal nitrates"],
+        "answer": "Metal halides"
     }
 ]
+
 
 
 
