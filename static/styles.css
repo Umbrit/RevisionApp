@@ -108,3 +108,18 @@ button:hover {
     font-weight: bold;
     margin: 15px 0;
 }
+
+.dashboard-btn {
+    background-color: #ff9800; /* Orange color for distinction */
+    color: white;
+    font-size: 18px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.dashboard-btn:hover {
+    background-color: #e65100; /* Darker orange on hover */
+}
