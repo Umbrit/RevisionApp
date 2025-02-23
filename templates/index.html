@@ -18,16 +18,47 @@
         </audio>
 
 
-        <form method="POST" id="quiz-form">
-            <p>{{ question["question"] }}</p>
-            {% for option in question["options"] %}
-                <label>
-                    <input type="radio" name="answer" value="{{ option }}" required>
-                    {{ option }}
-                </label><br>
-            {% endfor %}
-            <button type="submit">Submit</button>
-        </form>
+        <p id="feedback" class="hidden"></p>
+
+<form method="POST" id="quiz-form">
+    <p>{{ question["question"] }}</p>
+    {% for option in question["options"] %}
+        <label>
+            <input type="radio" name="answer" value="{{ option }}" required>
+            {{ option }}
+        </label><br>
+    {% endfor %}
+    <button type="button" onclick="checkAnswer()">Submit</button>
+</form>
+
+<script>
+    function checkAnswer() {
+        const selectedOption = document.querySelector('input[name="answer"]:checked');
+        if (!selectedOption) {
+            alert("Please select an answer!"); 
+            return;
+        }
+
+        const userAnswer = selectedOption.value;
+        const correctAnswer = "{{ question['answer'] }}";
+        const feedback = document.getElementById("feedback");
+
+        if (userAnswer === correctAnswer) {
+            feedback.textContent = "✅ Correct!";
+            feedback.style.color = "green";
+        } else {
+            feedback.textContent = "❌ Incorrect!";
+            feedback.style.color = "red";
+        }
+
+        feedback.classList.remove("hidden");
+
+        setTimeout(() => {
+            document.getElementById("quiz-form").submit(); 
+        }, 1500); // Shows feedback for 1.5 seconds before moving to the next question
+    }
+</script>
+
         
         <script>
             document.addEventListener("DOMContentLoaded", function() {

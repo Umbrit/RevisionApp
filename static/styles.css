@@ -98,3 +98,13 @@ button:hover {
 .start-btn:hover {
     background-color: #004d40;
 }
+
+.hidden {
+    display: none;
+}
+
+#feedback {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 15px 0;
+}
