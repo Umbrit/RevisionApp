@@ -1,4 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for
+import os
+
+
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key"  # Required for session tracking
@@ -183,4 +186,5 @@ def restart(quiz):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.getenv("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
