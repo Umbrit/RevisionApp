@@ -25,6 +25,13 @@
         {% else %}
             <h2>Quiz Complete!</h2>
             <p>Final Score: {{ score }}/{{ total }}</p>
+            {% if score == total %}
+                <div id="celebration">
+                    🎉🎊 Congratulations! You got a perfect score! 🎊🎉
+                </div>
+                <script src="{{ url_for('static', filename='celebration.js') }}"></script>
+            {% endif %}
+
             <a href="/restart"><button>Restart Quiz</button></a>
         {% endif %}
     </div>
