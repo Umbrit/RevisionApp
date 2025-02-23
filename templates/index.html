@@ -13,6 +13,10 @@
 
         {% if question %}
         <p id="timer">Time Left: <span id="time-left">15</span> seconds</p>
+        <audio id="warning-sound">
+            <source src="{{ url_for('static', filename='warning.mp3') }}" type="audio/mpeg">
+        </audio>
+
 
         <form method="POST" id="quiz-form">
             <p>{{ question["question"] }}</p>
@@ -32,14 +36,21 @@
                 const quizForm = document.getElementById("quiz-form");
         
                 function countdown() {
-                    if (timeLeft <= 0) {
-                        quizForm.submit();  // Auto-submit when time runs out
-                    } else {
-                        timerDisplay.textContent = timeLeft;
-                        timeLeft--;
-                        setTimeout(countdown, 1000);
-                    }
+            if (timeLeft <= 0) {
+                quizForm.submit();  // Auto-submit when time runs out
+            } else {
+                timerDisplay.textContent = timeLeft;
+
+                if (timeLeft === 5) {  // Play warning sound at 5 seconds left
+                    document.getElementById("warning-sound").play();
+                    timerDisplay.classList.add("flash");
                 }
+
+                timeLeft--;
+                setTimeout(countdown, 1000);
+            }
+        }
+
         
                 countdown();  // Start the timer when the page loads
             });
