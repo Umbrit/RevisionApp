@@ -12,16 +12,39 @@
         <p>Score: {{ score }}/{{ total }}</p>
 
         {% if question %}
-            <form method="POST">
-                <p>{{ question["question"] }}</p>
-                {% for option in question["options"] %}
-                    <label>
-                        <input type="radio" name="answer" value="{{ option }}" required>
-                        {{ option }}
-                    </label><br>
-                {% endfor %}
-                <button type="submit">Submit</button>
-            </form>
+        <p id="timer">Time Left: <span id="time-left">15</span> seconds</p>
+
+        <form method="POST" id="quiz-form">
+            <p>{{ question["question"] }}</p>
+            {% for option in question["options"] %}
+                <label>
+                    <input type="radio" name="answer" value="{{ option }}" required>
+                    {{ option }}
+                </label><br>
+            {% endfor %}
+            <button type="submit">Submit</button>
+        </form>
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                let timeLeft = 15;  // Set the timer duration
+                const timerDisplay = document.getElementById("time-left");
+                const quizForm = document.getElementById("quiz-form");
+        
+                function countdown() {
+                    if (timeLeft <= 0) {
+                        quizForm.submit();  // Auto-submit when time runs out
+                    } else {
+                        timerDisplay.textContent = timeLeft;
+                        timeLeft--;
+                        setTimeout(countdown, 1000);
+                    }
+                }
+        
+                countdown();  // Start the timer when the page loads
+            });
+        </script>
+        
         {% else %}
             <h2>Quiz Complete!</h2>
             <p>Final Score: {{ score }}/{{ total }}</p>

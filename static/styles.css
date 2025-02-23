@@ -66,3 +66,10 @@ button:hover {
     border-radius: 50%;
     animation: confetti-fall linear infinite;
 }
+
+#timer {
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+    margin-bottom: 10px;
+}
