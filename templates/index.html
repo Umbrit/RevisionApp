@@ -21,7 +21,9 @@
         <p id="feedback" class="hidden"></p>
 
 <form method="POST" id="quiz-form">
+    <p>Question {{ progress + 1 }}/{{ total }}</p>
     <p>{{ question["question"] }}</p>
+
     {% for option in question["options"] %}
         <label>
             <input type="radio" name="answer" value="{{ option }}" required>

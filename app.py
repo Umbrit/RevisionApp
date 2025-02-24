@@ -142,7 +142,8 @@ def quiz1():
         session.modified = True  
         return redirect(url_for("quiz1"))
 
-    return render_template("index.html", question=question, score=session["score1"], total=len(questions), quiz_title="Group 1 Alkali Metals Quiz")
+    return render_template("index.html", question=question, score=session["score1"], total=len(questions), progress=session["question_index1"], quiz_title="Group 1 Alkali Metals Quiz")
+
 
 
 
@@ -167,7 +168,8 @@ def quiz2():
         session.modified = True  
         return redirect(url_for("quiz2"))
 
-    return render_template("index.html", question=question, score=session["score2"], total=len(questions2), quiz_title="Group 7 The Halogens")
+    return render_template("index.html", question=question, score=session["score2"], total=len(questions2), progress=session["question_index2"], quiz_title="Group 7 The Halogens")
+
 
 
 
