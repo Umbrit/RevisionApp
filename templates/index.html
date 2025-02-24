@@ -19,6 +19,8 @@
 
 
         <p id="feedback" class="hidden"></p>
+        <p id="countdown" class="hidden"></p>
+
 
 <form method="POST" id="quiz-form">
     <p>Question {{ progress + 1 }}/{{ total }}</p>
@@ -35,30 +37,41 @@
 
 <script>
     function checkAnswer() {
-        const selectedOption = document.querySelector('input[name="answer"]:checked');
-        if (!selectedOption) {
-            alert("Please select an answer!"); 
-            return;
-        }
-
-        const userAnswer = selectedOption.value;
-        const correctAnswer = "{{ question['answer'] }}";
-        const feedback = document.getElementById("feedback");
-
-        if (userAnswer === correctAnswer) {
-            feedback.textContent = "✅ Correct!";
-            feedback.style.color = "green";
-        } else {
-            feedback.textContent = "❌ Incorrect!";
-            feedback.style.color = "red";
-        }
-
-        feedback.classList.remove("hidden");
-
-        setTimeout(() => {
-            document.getElementById("quiz-form").submit(); 
-        }, 1500); // Shows feedback for 1.5 seconds before moving to the next question
+    const selectedOption = document.querySelector('input[name="answer"]:checked');
+    if (!selectedOption) {
+        alert("Please select an answer!"); 
+        return;
     }
+
+    const userAnswer = selectedOption.value;
+    const correctAnswer = "{{ question['answer'] }}";
+    const feedback = document.getElementById("feedback");
+    const countdownDisplay = document.getElementById("countdown");
+
+    if (userAnswer === correctAnswer) {
+        feedback.textContent = "✅ Correct! Well done!";
+        feedback.style.color = "green";
+    } else {
+        feedback.textContent = `❌ Incorrect! The correct answer was: ${correctAnswer}`;
+        feedback.style.color = "red";
+    }
+
+    feedback.classList.remove("hidden");
+
+    let countdown = 5;
+    countdownDisplay.textContent = `Next question in ${countdown}...`;
+    countdownDisplay.classList.remove("hidden");
+
+    const countdownInterval = setInterval(() => {
+        countdown--;
+        countdownDisplay.textContent = `Next question in ${countdown}...`;
+        if (countdown === 0) {
+            clearInterval(countdownInterval);
+            document.getElementById("quiz-form").submit();
+        }
+    }, 1000);
+}
+
 </script>
 
         

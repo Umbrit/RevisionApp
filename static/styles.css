@@ -123,3 +123,14 @@ button:hover {
 .dashboard-btn:hover {
     background-color: #e65100; /* Darker orange on hover */
 }
+
+#countdown {
+    font-size: 18px;
+    font-weight: bold;
+    color: blue;
+    margin-top: 10px;
+}
+
+.hidden {
+    display: none;
+}
