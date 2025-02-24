@@ -36,12 +36,16 @@
 </form>
 
 <script>
-    function checkAnswer() {
+let timerRunning = true; // Track if the timer is active
+
+function checkAnswer() {
     const selectedOption = document.querySelector('input[name="answer"]:checked');
     if (!selectedOption) {
         alert("Please select an answer!"); 
         return;
     }
+
+    timerRunning = false; // Stop the 15-second timer
 
     const userAnswer = selectedOption.value;
     const correctAnswer = "{{ question['answer'] }}";
@@ -72,34 +76,37 @@
     }, 1000);
 }
 
+
 </script>
 
         
         <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                let timeLeft = 15;  // Set the timer duration
-                const timerDisplay = document.getElementById("time-left");
-                const quizForm = document.getElementById("quiz-form");
-        
-                function countdown() {
-            if (timeLeft <= 0) {
-                quizForm.submit();  // Auto-submit when time runs out
-            } else {
-                timerDisplay.textContent = timeLeft;
+document.addEventListener("DOMContentLoaded", function() {
+    let timeLeft = 15;  // Set the timer duration
+    const timerDisplay = document.getElementById("time-left");
+    const quizForm = document.getElementById("quiz-form");
 
-                if (timeLeft === 5) {  // Play warning sound at 5 seconds left
-                    document.getElementById("warning-sound").play();
-                    timerDisplay.classList.add("flash");
-                }
+    function countdown() {
+        if (!timerRunning) return; // Stop countdown if user has already answered
 
-                timeLeft--;
-                setTimeout(countdown, 1000);
+        if (timeLeft <= 0) {
+            quizForm.submit();  // Auto-submit when time runs out
+        } else {
+            timerDisplay.textContent = timeLeft;
+
+            if (timeLeft === 5) {  // Play warning sound at 5 seconds left
+                document.getElementById("warning-sound").play();
+                timerDisplay.classList.add("flash");
             }
-        }
 
-        
-                countdown();  // Start the timer when the page loads
-            });
+            timeLeft--;
+            setTimeout(countdown, 1000);
+        }
+    }
+
+    countdown();  // Start the timer when the page loads
+});
+
         </script>
         
         {% else %}
