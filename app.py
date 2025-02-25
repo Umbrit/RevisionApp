@@ -113,6 +113,58 @@ questions2 = [
     }
 ]
 
+questions3 = [
+    {
+        "question": "What type of elements typically form ionic bonds?",
+        "options": ["Two metals", "A metal and a non-metal", "Two non-metals", "Metals only"],
+        "answer": "A metal and a non-metal"
+    },
+    {
+        "question": "What charge does a sodium ion (Na⁺) have?",
+        "options": ["Positive", "Negative", "Neutral", "Variable"],
+        "answer": "Positive"
+    },
+    {
+        "question": "What charge does a chloride ion (Cl⁻) have?",
+        "options": ["Positive", "Negative", "Neutral", "Variable"],
+        "answer": "Negative"
+    },
+    {
+        "question": "What holds ions together in an ionic compound?",
+        "options": ["Magnetic force", "Covalent bonding", "Electrostatic attraction", "Gravitational force"],
+        "answer": "Electrostatic attraction"
+    },
+    {
+        "question": "Which of the following is an example of an ionic compound?",
+        "options": ["CO₂", "H₂O", "NaCl", "O₂"],
+        "answer": "NaCl"
+    },
+    {
+        "question": "Why do ionic compounds have high melting points?",
+        "options": ["They are made of large atoms", "They have strong electrostatic forces", "They contain weak bonds", "They are always in gaseous form"],
+        "answer": "They have strong electrostatic forces"
+    },
+    {
+        "question": "What happens to electrons in an ionic bond?",
+        "options": ["They are shared equally", "They are transferred from one atom to another", "They remain unchanged", "They form a sea of delocalized electrons"],
+        "answer": "They are transferred from one atom to another"
+    },
+    {
+        "question": "What structure do ionic compounds form?",
+        "options": ["Simple molecules", "Giant covalent structures", "Giant ionic lattices", "Single atoms"],
+        "answer": "Giant ionic lattices"
+    },
+    {
+        "question": "Why can ionic compounds conduct electricity when dissolved in water?",
+        "options": ["The ions are free to move", "The molecules break apart", "The water becomes a metal", "The compound becomes a gas"],
+        "answer": "The ions are free to move"
+    },
+    {
+        "question": "What happens when an ionic compound dissolves in water?",
+        "options": ["The compound disappears", "The ions separate and move freely", "The water evaporates", "The atoms form new elements"],
+        "answer": "The ions separate and move freely"
+    }
+]
 
 
 
@@ -171,6 +223,28 @@ def quiz2():
     return render_template("index.html", question=question, score=session["score2"], total=len(questions2), progress=session["question_index2"], quiz_title="Group 7 The Halogens")
 
 
+@app.route("/quiz3", methods=["GET", "POST"])
+def quiz3():
+    if "score3" not in session:
+        session["score3"] = 0
+        session["question_index3"] = 0
+
+    question_index = session["question_index3"]
+
+    if question_index >= len(questions3):  
+        return render_template("index.html", question=None, score=session["score3"], total=len(questions3), quiz_title="Ionic Bonding Quiz")
+
+    question = questions3[question_index]
+
+    if request.method == "POST":
+        selected_answer = request.form.get("answer")
+        if selected_answer == question["answer"]:
+            session["score3"] += 1
+        session["question_index3"] += 1
+        session.modified = True  
+        return redirect(url_for("quiz3"))
+
+    return render_template("index.html", question=question, score=session["score3"], total=len(questions3), progress=session["question_index3"], quiz_title="Ionic Bonding Quiz")
 
 
 @app.route("/restart/<quiz>")
@@ -183,7 +257,12 @@ def restart(quiz):
         session.pop("score2", None)
         session.pop("question_index2", None)
         return redirect(url_for("quiz2"))
+    elif quiz == "quiz3":
+        session.pop("score3", None)
+        session.pop("question_index3", None)
+        return redirect(url_for("quiz3"))
     return redirect(url_for("home"))  # Redirect to home if no quiz is specified
+
 
 
 
