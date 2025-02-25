@@ -149,21 +149,22 @@ questions3 = [
         "options": ["They are shared equally", "They are transferred from one atom to another", "They remain unchanged", "They form a sea of delocalized electrons"],
         "answer": "They are transferred from one atom to another"
     },
-    {
-        "question": "What structure do ionic compounds form?",
-        "options": ["Simple molecules", "Giant covalent structures", "Giant ionic lattices", "Single atoms"],
-        "answer": "Giant ionic lattices"
+        {
+        "question": "What is an ion?",
+        "options": ["An atom with extra protons", "An atom that has gained or lost electrons", "A neutral atom", "A molecule"],
+        "answer": "An atom that has gained or lost electrons"
     },
     {
-        "question": "Why can ionic compounds conduct electricity when dissolved in water?",
-        "options": ["The ions are free to move", "The molecules break apart", "The water becomes a metal", "The compound becomes a gas"],
-        "answer": "The ions are free to move"
+        "question": "What is the difference between an atom and an ion?",
+        "options": ["Atoms have a charge, ions do not", "Ions have gained or lost electrons, atoms are neutral", "Atoms are only found in metals", "Ions do not exist in nature"],
+        "answer": "Ions have gained or lost electrons, atoms are neutral"
     },
     {
-        "question": "What happens when an ionic compound dissolves in water?",
-        "options": ["The compound disappears", "The ions separate and move freely", "The water evaporates", "The atoms form new elements"],
-        "answer": "The ions separate and move freely"
+        "question": "Why do noble gases not form ionic bonds?",
+        "options": ["They already have a full outer shell", "They are too small", "They do not exist in nature", "They are always in liquid form"],
+        "answer": "They already have a full outer shell"
     }
+
 ]
 
 
