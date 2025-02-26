@@ -1,88 +1,76 @@
 body {
-    font-family: 'Roboto', sans-serif; /* Changed to a more modern font */
-    text-align: center;
-    background-color: #e0f7fa; /* Light cyan background */
-    background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png'); /* Optional texture */
-    height: 100vh; /* Ensures full screen height */
+    font-family: 'Roboto', sans-serif;
+    background-color: #e0f7fa;
+    background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+    height: 100vh;
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-
-.header {
-    width: 100%;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #00796b;
-    color: white;
-    font-size: 24px;
-    margin-bottom: 20px;
-    text-align: left;
-    position: relative;
-}
-
-
-
-
-.logout-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: #ff9800;
-    color: white;
-    padding: 8px 16px;
-    font-size: 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.logout-btn:hover {
-    background-color: #e65100;
-}
-
-.container {
-    max-width: 900px;
-    margin: auto;
-    padding: 60px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
     text-align: center;
-    margin-top: 30px;
 }
 
+.quiz-container {
+    width: 60%;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-
-.logout-btn {
-    background-color: #ff9800;
-    color: white;
-    padding: 8px 16px;
-    font-size: 16px;
+.question-box {
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
     border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    text-align: center;
 }
 
-.logout-btn:hover {
-    background-color: #e65100;
+.question-text {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 15px;
 }
-
-
 
 h1 {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
+    font-size: 2.5em;
+    color: #00796b;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.option {
+    margin: 10px 0;
+    font-size: 1.2em;
+}
+
+.next-btn {
+    background-color: #00796b;
+    color: white;
+    font-size: 18px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.next-btn:hover {
+    background-color: #004d40;
 }
 
 button {
     background-color: #00796b;
     color: white;
     padding: 12px 24px;
-    margin: 10px;
     cursor: pointer;
     font-size: 18px;
     border-radius: 8px;
@@ -93,54 +81,15 @@ button:hover {
     background-color: #005a4f;
 }
 
-
-h1 {
-    color: #00796b; /* Main heading color */
-    font-size: 2.5em; /* Larger heading */
-    margin-bottom: 20px; /* Space below heading */
-}
-
-button {
-    background-color: #00796b; /* Chemistry theme color */
-    color: white;
-    border: none;
-    padding: 12px 20px; /* More padding for buttons */
-    cursor: pointer;
-    font-size: 18px; /* Larger button font */
-    border-radius: 5px; /* Slightly rounded button corners */
-}
-
-button:hover {
-    background-color: #004d40; /* Darker green on hover */
-}
-
-@keyframes confetti-fall {
-    0% {
-        transform: translateY(0) rotate(0);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(100vh) rotate(720deg);
-        opacity: 0;
-    }
-}
-
-.confetti {
-    position: fixed;
-    top: 0;
-    width: 10px;
-    height: 10px;
-    background-color: red;
-    opacity: 0.8;
-    border-radius: 50%;
-    animation: confetti-fall linear infinite;
-}
-
 #timer {
     font-size: 20px;
     font-weight: bold;
     color: red;
     margin-bottom: 10px;
+}
+
+.flash {
+    animation: flash 0.5s infinite alternate;
 }
 
 @keyframes flash {
@@ -149,37 +98,8 @@ button:hover {
     100% { color: red; }
 }
 
-.flash {
-    animation: flash 0.5s infinite alternate;
-}
-
-.start-btn {
-    background-color: #00796b;
-    color: white;
-    font-size: 20px;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-}
-
-.start-btn:hover {
-    background-color: #004d40;
-}
-
-.hidden {
-    display: none;
-}
-
-#feedback {
-    font-size: 20px;
-    font-weight: bold;
-    margin: 15px 0;
-}
-
 .dashboard-btn {
-    background-color: #ff9800; /* Orange color for distinction */
+    background-color: #ff9800;
     color: white;
     font-size: 18px;
     padding: 12px 20px;
@@ -190,7 +110,7 @@ button:hover {
 }
 
 .dashboard-btn:hover {
-    background-color: #e65100; /* Darker orange on hover */
+    background-color: #e65100;
 }
 
 #countdown {
@@ -204,18 +124,24 @@ button:hover {
     display: none;
 }
 
-
-body {
-    margin: 0;
-    padding: 0;
+p {
+    font-size: 1.2em;
+    margin: 10px 0;
 }
 
-.header {
-    position: fixed;
-    top: 0;
-    width: 100%;
+input[type="radio"] {
+    margin-right: 10px;
 }
 
-.container {
-    margin-top: 100px;
+input[type="submit"] {
+    background-color: #00796b;
+    color: white;
+    padding: 12px 24px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+}
+
+input[type="submit"]:hover {
+    background-color: #004d40;
 }

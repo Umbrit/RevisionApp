@@ -239,16 +239,23 @@ def quiz1():
         return render_template("quiz1.html", question=None, score=session["score1"], total=len(questions), quiz_title="Group 1 Alkali Metals Quiz")
 
     question = questions[question_index]
+    feedback = None  # Initialize feedback to prevent reference errors
 
     if request.method == "POST":
         selected_answer = request.form.get("answer")
-        if selected_answer == question["answer"]:
-            session["score1"] += 1
-        session["question_index1"] += 1
-        session.modified = True
-        return redirect(url_for("quiz1"))
+        if selected_answer:
+            feedback = "Incorrect!"
+            if selected_answer == question["answer"]:
+                session["score1"] += 1
+                feedback = "Correct!"
+            
+            session["question_index1"] += 1
+            session["feedback1"] = feedback
+            session.modified = True
+            return redirect(url_for("quiz1"))
 
-    return render_template("quiz1.html", question=question, score=session["score1"], total=len(questions))
+    return render_template("quiz1.html", question=question, score=session["score1"], total=len(questions), feedback=session.get("feedback1"))
+
 
 
 
@@ -267,13 +274,35 @@ def quiz2():
 
     question = questions2[question_index]
 
+    @app.route("/quiz2", methods=["GET", "POST"])
+    def quiz2():
+        if "score2" not in session:
+            session["score2"] = 0
+        session["question_index2"] = 0
+
+    question_index = session["question_index2"]
+
+    if question_index >= len(questions2):
+        return render_template("quiz2.html", question=None, score=session["score2"], total=len(questions2), quiz_title="Group 7 The Halogens")
+
+    question = questions2[question_index]
+    feedback = None
+
     if request.method == "POST":
         selected_answer = request.form.get("answer")
-        if selected_answer == question["answer"]:
-            session["score2"] += 1
-        session["question_index2"] += 1
-        session.modified = True
-        return redirect(url_for("quiz2"))
+        if selected_answer:
+            feedback = "Incorrect!"
+            if selected_answer == question["answer"]:
+                session["score2"] += 1
+                feedback = "Correct!"
+            
+            session["question_index2"] += 1
+            session["feedback2"] = feedback
+            session.modified = True
+            return redirect(url_for("quiz2"))
+
+    return render_template("quiz2.html", question=question, score=session["score2"], total=len(questions2), feedback=session.get("feedback2"))
+
 
     return render_template("quiz2.html", question=question, score=session["score2"], total=len(questions2))
 
@@ -290,16 +319,22 @@ def quiz3():
         return render_template("quiz3.html", question=None, score=session["score3"], total=len(questions3), quiz_title="Ionic Bonding Quiz")
 
     question = questions3[question_index]
+    feedback = None  # Initialize feedback to avoid reference errors
 
     if request.method == "POST":
         selected_answer = request.form.get("answer")
-        if selected_answer == question["answer"]:
-            session["score3"] += 1
-        session["question_index3"] += 1
-        session.modified = True
-        return redirect(url_for("quiz3"))
+        if selected_answer:  # Ensure a selection is made
+            feedback = "Incorrect!"
+            if selected_answer == question["answer"]:
+                session["score3"] += 1
+                feedback = "Correct!"
+            
+            session["question_index3"] += 1
+            session["feedback3"] = feedback  # Store feedback in session
+            session.modified = True
+            return redirect(url_for("quiz3"))
 
-    return render_template("quiz3.html", question=question, score=session["score3"], total=len(questions3))
+    return render_template("quiz3.html", question=question, score=session["score3"], total=len(questions3), feedback=session.get("feedback3"))
 
 
 

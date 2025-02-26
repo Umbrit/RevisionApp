@@ -1,22 +1,43 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Group 1 Alkali Metals Quiz</title>
-</head>
+    <head>
+        <title>Group 1 Alkali Metals Quiz</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    </head>
+    
 <body>
     <h1>{{ quiz_title }}</h1>
     {% if question %}
-        <p>{{ question['question'] }}</p>
-        <form method="post">
-            {% for option in question['options'] %}
-                <input type="radio" name="answer" value="{{ option }}"> {{ option }}<br>
-            {% endfor %}
-            <input type="submit" value="Next">
-        </form>
-        <p>Score: {{ score }} / {{ total }}</p>
-    {% else %}
-        <p>Quiz completed!</p>
-        <a href="{{ url_for('restart', quiz='quiz1') }}">Restart Quiz 1</a>
+    <p class="question-text">{{ question['question'] }}</p>
+{% if feedback %}
+    <p id="feedback">{{ feedback }}</p>
+    <script>
+        setTimeout(function() {
+            window.location.href = "{{ url_for('quiz1') }}";
+        }, 5000);
+    </script>
+{% endif %}
+
+    <form id="quiz-form" method="post">
+        {% for option in question['options'] %}
+            <input type="radio" name="answer" value="{{ option }}"> {{ option }}<br>
+        {% endfor %}
+        <input type="submit" value="Submit Answer">
+    </form>
+    <p>Score: {{ score }} / {{ total }}</p>
+
+    {% if session.get('feedback1') %}
+        <p id="feedback">{{ session['feedback1'] }}</p>
+        <script>
+            setTimeout(function() {
+                document.getElementById('quiz-form').submit();
+            }, 5000);
+        </script>
     {% endif %}
+{% else %}
+    <p>Quiz completed!</p>
+    <a href="{{ url_for('restart', quiz='quiz1') }}">Restart Quiz 1</a>
+{% endif %}
+
 </body>
 </html>
