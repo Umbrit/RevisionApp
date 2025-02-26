@@ -7,15 +7,23 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to the Chemistry Quiz! 🧪</h1>
-        <p>Test your knowledge and see how well you do!</p>
-        <a href="/quiz1"><button class="start-btn">Start Group 1 Alkali Metals Quiz</button></a>
-        <br><br>
-        <a href="/quiz2"><button class="start-btn">Start Group 7 Halogens Quiz</button></a>
-        <br><br>
-        <a href="/quiz3"><button class="start-btn">Start Ionic Bonding Quiz</button></a>
-
+    <div class="header">
+        <div>Welcome to the Homepage!</div>
+        
     </div>
+    
+        
+        <a href="{{ url_for('logout') }}"><button class="logout-btn">Logout</button></a>
+        
+        <div class="container">
+            <h1>Welcome to the Chemistry Quiz! 🧪</h1>
+            <p>Test your knowledge and see how well you do!</p>
+            <a href="{{ url_for('quiz1') }}"><button>Start Group 1 Alkali Metals Quiz</button></a>
+            <a href="{{ url_for('quiz2') }}"><button>Start Group 7 Halogens Quiz</button></a>
+            <a href="{{ url_for('quiz3') }}"><button>Start Ionic Bonding Quiz</button></a>
+
+
+        </div>
+        
 </body>
 </html>

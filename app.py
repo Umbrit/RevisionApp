@@ -6,6 +6,61 @@ import os
 app = Flask(__name__)
 app.secret_key = "your_secret_key"  # Required for session tracking
 
+import sqlite3
+
+conn = sqlite3.connect("users.db")
+cursor = conn.cursor()
+cursor.execute("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, username TEXT UNIQUE, password TEXT)")
+conn.close()
+
+
+@app.route("/")
+def welcome():
+    if "username" in session:
+        return redirect(url_for("home"))
+    return render_template("welcome.html")
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if "username" in session:
+        return redirect(url_for("home"))
+    
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        
+        conn = sqlite3.connect("users.db")
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM users WHERE username = ? AND password = ?", (username, password))
+        user = cursor.fetchone()
+        conn.close()
+        
+        if user:
+            session["username"] = username
+            return redirect(url_for("home"))
+        return "Invalid credentials. Please try again."
+    return render_template("login.html")
+
+
+
+@app.route("/home")
+def home():
+    if "username" not in session:
+        return redirect(url_for("login"))
+    return render_template("home.html")
+
+
+
+# Route: Logout
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("welcome"))
+
+
+
+
 # Sample chemistry questions
 questions = [
     {
@@ -170,9 +225,7 @@ questions3 = [
 
 
 
-@app.route("/")
-def home():
-    return render_template("home.html")
+
 
 @app.route("/quiz1", methods=["GET", "POST"])
 def quiz1():
@@ -182,8 +235,8 @@ def quiz1():
 
     question_index = session["question_index1"]
 
-    if question_index >= len(questions):  
-        return render_template("index.html", question=None, score=session["score1"], total=len(questions), quiz_title="Group 1 Alkali Metals Quiz")
+    if question_index >= len(questions):
+        return render_template("quiz1.html", question=None, score=session["score1"], total=len(questions), quiz_title="Group 1 Alkali Metals Quiz")
 
     question = questions[question_index]
 
@@ -192,10 +245,11 @@ def quiz1():
         if selected_answer == question["answer"]:
             session["score1"] += 1
         session["question_index1"] += 1
-        session.modified = True  
+        session.modified = True
         return redirect(url_for("quiz1"))
 
-    return render_template("index.html", question=question, score=session["score1"], total=len(questions), progress=session["question_index1"], quiz_title="Group 1 Alkali Metals Quiz")
+    return render_template("quiz1.html", question=question, score=session["score1"], total=len(questions))
+
 
 
 
@@ -208,8 +262,8 @@ def quiz2():
 
     question_index = session["question_index2"]
 
-    if question_index >= len(questions2):  
-        return render_template("index.html", question=None, score=session["score2"], total=len(questions2), quiz_title="Group 7 The Halogens")
+    if question_index >= len(questions2):
+        return render_template("quiz2.html", question=None, score=session["score2"], total=len(questions2), quiz_title="Group 7 The Halogens")
 
     question = questions2[question_index]
 
@@ -218,10 +272,10 @@ def quiz2():
         if selected_answer == question["answer"]:
             session["score2"] += 1
         session["question_index2"] += 1
-        session.modified = True  
+        session.modified = True
         return redirect(url_for("quiz2"))
 
-    return render_template("index.html", question=question, score=session["score2"], total=len(questions2), progress=session["question_index2"], quiz_title="Group 7 The Halogens")
+    return render_template("quiz2.html", question=question, score=session["score2"], total=len(questions2))
 
 
 @app.route("/quiz3", methods=["GET", "POST"])
@@ -232,8 +286,8 @@ def quiz3():
 
     question_index = session["question_index3"]
 
-    if question_index >= len(questions3):  
-        return render_template("index.html", question=None, score=session["score3"], total=len(questions3), quiz_title="Ionic Bonding Quiz")
+    if question_index >= len(questions3):
+        return render_template("quiz3.html", question=None, score=session["score3"], total=len(questions3), quiz_title="Ionic Bonding Quiz")
 
     question = questions3[question_index]
 
@@ -242,10 +296,11 @@ def quiz3():
         if selected_answer == question["answer"]:
             session["score3"] += 1
         session["question_index3"] += 1
-        session.modified = True  
+        session.modified = True
         return redirect(url_for("quiz3"))
 
-    return render_template("index.html", question=question, score=session["score3"], total=len(questions3), progress=session["question_index3"], quiz_title="Ionic Bonding Quiz")
+    return render_template("quiz3.html", question=question, score=session["score3"], total=len(questions3))
+
 
 
 @app.route("/restart/<quiz>")
@@ -262,11 +317,7 @@ def restart(quiz):
         session.pop("score3", None)
         session.pop("question_index3", None)
         return redirect(url_for("quiz3"))
-    return redirect(url_for("home"))  # Redirect to home if no quiz is specified
-
-
-
+    return redirect(url_for("welcome"))
 
 if __name__ == "__main__":
-    port = int(os.getenv("PORT", 5000))
-    app.run(host="0.0.0.0", port=port, debug=True)
+    app.run(debug=True)

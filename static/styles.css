@@ -10,18 +10,87 @@ body {
 }
 
 
-.container {
-    width: 80%; /* Make the container take up more width */
-    height: 80vh; /* Use 80% of the viewport height */
-    margin: auto;
-    background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
-    padding: 40px; /* Increased padding */
-    border-radius: 15px; /* Rounded corners */
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Softer shadow */
-    border: 1px solid #00796b; /* Chemistry theme color */
+.header {
+    width: 100%;
+    padding: 20px;
     display: flex;
-    flex-direction: column;
-    justify-content: center; /* Centers content vertically */
+    justify-content: space-between;
+    align-items: center;
+    background-color: #00796b;
+    color: white;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: left;
+    position: relative;
+}
+
+
+
+
+.logout-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #ff9800;
+    color: white;
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #e65100;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 60px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    margin-top: 30px;
+}
+
+
+
+.logout-btn {
+    background-color: #ff9800;
+    color: white;
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #e65100;
+}
+
+
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+button {
+    background-color: #00796b;
+    color: white;
+    padding: 12px 24px;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #005a4f;
 }
 
 
@@ -133,4 +202,20 @@ button:hover {
 
 .hidden {
     display: none;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.container {
+    margin-top: 100px;
 }
