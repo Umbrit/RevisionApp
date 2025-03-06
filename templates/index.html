@@ -22,59 +22,69 @@
         <p id="countdown" class="hidden"></p>
 
 
-<form method="POST" id="quiz-form">
-    <p>Question {{ progress + 1 }}/{{ total }}</p>
-    <p>{{ question["question"] }}</p>
-
-    {% for option in question["options"] %}
-        <label>
-            <input type="radio" name="answer" value="{{ option }}" required>
-            {{ option }}
-        </label><br>
-    {% endfor %}
-    <button type="button" onclick="checkAnswer()">Submit</button>
-</form>
-
-<script>
-let timerRunning = true; // Track if the timer is active
-
-function checkAnswer() {
-    const selectedOption = document.querySelector('input[name="answer"]:checked');
-    if (!selectedOption) {
-        alert("Please select an answer!"); 
-        return;
-    }
-
-    timerRunning = false; // Stop the 15-second timer
-
-    const userAnswer = selectedOption.value;
-    const correctAnswer = "{{ question['answer'] }}";
-    const feedback = document.getElementById("feedback");
-    const countdownDisplay = document.getElementById("countdown");
-
-    if (userAnswer === correctAnswer) {
-        feedback.textContent = "✅ Correct! Well done!";
-        feedback.style.color = "green";
-    } else {
-        feedback.textContent = `❌ Incorrect! The correct answer was: ${correctAnswer}`;
-        feedback.style.color = "red";
-    }
-
-    feedback.classList.remove("hidden");
-
-    let countdown = 5;
-    countdownDisplay.textContent = `Next question in ${countdown}...`;
-    countdownDisplay.classList.remove("hidden");
-
-    const countdownInterval = setInterval(() => {
-        countdown--;
-        countdownDisplay.textContent = `Next question in ${countdown}...`;
-        if (countdown === 0) {
-            clearInterval(countdownInterval);
-            document.getElementById("quiz-form").submit();
+        <form method="POST" id="quiz-form">
+            <p>Question {{ progress + 1 }}/{{ total }}</p>
+            <p>{{ question["question"] }}</p>
+        
+            {% for option in question["options"] %}
+                <label class="answer-option">
+                    <input type="radio" name="answer" value="{{ option }}" required>
+                    {{ option }}
+                </label><br>
+            {% endfor %}
+            <button type="button" id="submit-btn" onclick="checkAnswer()">Submit</button>
+        </form>
+        
+        <script>
+        let timerRunning = true; // Track if the timer is active
+        
+        function checkAnswer() {
+            const selectedOption = document.querySelector('input[name="answer"]:checked');
+            if (!selectedOption) {
+                alert("Please select an answer!"); 
+                return;
+            }
+        
+            timerRunning = false; // Stop the 15-second timer
+        
+            const userAnswer = selectedOption.value;
+            const correctAnswer = "{{ question['answer'] }}";
+            const feedback = document.getElementById("feedback");
+            const countdownDisplay = document.getElementById("countdown");
+        
+            // Disable all answer choices
+            document.querySelectorAll('input[name="answer"]').forEach(option => {
+                option.disabled = true;
+            });
+        
+            // Hide the submit button
+            document.getElementById("submit-btn").style.display = "none";
+        
+            if (userAnswer === correctAnswer) {
+                feedback.textContent = "✅ Correct! Well done!";
+                feedback.style.color = "green";
+            } else {
+                feedback.textContent = `❌ Incorrect! The correct answer was: ${correctAnswer}`;
+                feedback.style.color = "red";
+            }
+        
+            feedback.classList.remove("hidden");
+        
+            let countdown = 5;
+            countdownDisplay.textContent = `Next question in ${countdown}...`;
+            countdownDisplay.classList.remove("hidden");
+        
+            const countdownInterval = setInterval(() => {
+                countdown--;
+                countdownDisplay.textContent = `Next question in ${countdown}...`;
+                if (countdown === 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById("quiz-form").submit();
+                }
+            }, 1000);
         }
-    }, 1000);
-}
+        </script>
+        
 
 
 </script>
