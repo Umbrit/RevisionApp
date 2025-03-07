@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Panel</h1>
+       
+        <h2>🎰 Slot Machine 🎰</h2>
+        <p>Your Balance: <strong>{{ money }} coins</strong></p>
+
+        {% if win_message %}
+            <p>{{ win_message }}</p>
+        {% endif %}
+
+        {% if result %}
+            <h2>Spin Result: {{ result }}</h2>
+        {% endif %}
+
+        <form method="POST">
+            <label for="bet">Bet Amount:</label>
+            <input type="number" name="bet" min="1" max="{{ money }}" required>
+            <button type="submit">Spin</button>
+        </form>
+
+        <br><br>
+
+        <!-- Redeem Code Section -->
+        {% if money == 0 %}
+        <h2>💰 Need More Coins? Enter a Code!</h2>
+        <form method="POST">
+            <input type="text" name="redeem_code" placeholder="Enter code" required>
+            <button type="submit" name="redeem">Redeem</button>
+        </form>
+        {% endif %}
+    
+        <br><br>
+        <a href="{{ url_for('logout_admin') }}"><button>Logout</button></a>
+        <a href="{{ url_for('home') }}"><button>Back to Home</button></a>
+    </div> <!-- Closing container -->
+    </body>
+    </html>
+    
+

@@ -174,6 +174,103 @@ questions3 = [
 def home():
     return render_template("home.html")
 
+@app.route("/password-protected", methods=["GET", "POST"])
+def password_page():
+    correct_password = "admin123"  # Change this to your preferred password
+
+    if request.method == "POST":
+        entered_password = request.form.get("password")
+        if entered_password == correct_password:
+            session["is_admin"] = True  # Store session state for admin access
+            return redirect(url_for("admin_page"))  # Redirect to Admin Page
+        else:
+            return render_template("password.html", error="Incorrect password, try again.")
+
+    return render_template("password.html")  # Render password input page
+
+import random
+
+import random
+import time  # Import time to track resets
+
+import random
+import time
+
+import random
+import time
+
+@app.route("/admin", methods=["GET", "POST"])
+def admin_page():
+    if not session.get("is_admin"):
+        return redirect(url_for("password_page"))  # Redirect if not logged in as admin
+
+    # Check if the balance needs to reset every hour
+    if "money" not in session or "last_reset" not in session:
+        session["money"] = 100
+        session["last_reset"] = time.time()
+    else:
+        elapsed_time = time.time() - session["last_reset"]
+        if elapsed_time > 3600:  # 1 hour
+            session["money"] = 100
+            session["last_reset"] = time.time()
+            session.modified = True  # Save session changes
+
+    result = None
+    win_message = None
+    bet_amount = 0
+    redeem_message = None  # Message for redeeming code
+
+    # Slot Machine Logic
+    symbols = ["🍒", "🍋", "🍉", "⭐", "💎"]
+    payouts = {
+        "🍒🍒🍒": 5,
+        "🍋🍋🍋": 10,
+        "🍉🍉🍉": 20,
+        "⭐⭐⭐": 50,
+        "💎💎💎": 100
+    }
+
+    if request.method == "POST":
+        if "redeem" in request.form:  # Check if they entered a redeem code
+            redeem_code = request.form.get("redeem_code")
+            if session["money"] == 0 and redeem_code == "GET100":  # Only works if money is 0
+                session["money"] = 100
+                redeem_message = "✅ You received 100 coins!"
+                session.modified = True
+            else:
+                redeem_message = "❌ Invalid code or you still have coins."
+
+        else:  # Otherwise, process the slot machine bet
+            bet_amount = int(request.form.get("bet"))
+
+            if bet_amount > session["money"] or bet_amount <= 0:
+                win_message = "Invalid bet! Check your balance."
+            else:
+                session["money"] -= bet_amount  # Deduct bet
+                spin = random.choices(symbols, k=3)  # Random symbols
+                spin_result = "".join(spin)
+
+                if spin_result in payouts:
+                    winnings = bet_amount * payouts[spin_result]  # Calculate winnings
+                    session["money"] += winnings
+                    win_message = f"🎉 You won {winnings} coins!"
+                else:
+                    session["money"] += bet_amount // 2  # Give back half bet if they lose
+                    win_message = f"❌ No match! You lost {bet_amount // 2} coins."
+
+                session.modified = True  # Update session
+
+        result = locals().get("spin_result", None)  # Fix to prevent UnboundLocalError
+
+    return render_template("admin.html", money=session["money"], result=result, win_message=win_message, redeem_message=redeem_message)
+
+@app.route("/logout-admin")
+def logout_admin():
+    session.pop("is_admin", None)  # Remove admin session
+    return redirect(url_for("home"))  # Redirect back to home page
+
+
+
 @app.route("/quiz1", methods=["GET", "POST"])
 def quiz1():
     if "score1" not in session:
